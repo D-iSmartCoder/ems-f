@@ -6,29 +6,30 @@ import { Employee } from './employee';
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeService  {
+export class EmployeeService {
 
-  private baseURL = "http://localhost:9090/api/v1/employees";
-  
-  constructor(private httpClient : HttpClient) { }
+  private baseURL = "http://localhost:9595/api/v1/employees";
 
-  getEmployeesList() : Observable<Employee[]>{
+  constructor (private httpClient: HttpClient) { }
+
+  getEmployeesList(): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(`${this.baseURL}`);
   }
 
-  createEmployee(employee: Employee):Observable<object>{
-    return this.httpClient.post(`${this.baseURL}`,employee);
+
+  createEmployee(employee: Employee): Observable<object> {
+    return this.httpClient.post(`${this.baseURL}`, employee);
   }
 
-  getEmployeeById(id:number): Observable<Employee> {
+  getEmployeeById(id: number): Observable<Employee> {
     return this.httpClient.get<Employee>(`${this.baseURL}/${id}`)
   }
-    
-  updateEmployee(id:number,employee: Employee):Observable<object>{
+
+  updateEmployee(id: number, employee: Employee): Observable<object> {
     return this.httpClient.put(`${this.baseURL}/${id}`, employee);
   }
-  
-  deleteEmployee(id: number): Observable<Object>{
+
+  deleteEmployee(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
 }
